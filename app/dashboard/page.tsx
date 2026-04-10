@@ -1,7 +1,6 @@
 export const dynamic = "force-dynamic";
 
 import { prisma } from "../lib/prisma"
-import { redirect } from "next/navigation"
 import LinkList from "./linklist"
 import Link from "next/link"
 
@@ -10,8 +9,12 @@ export default async function Dashboard() {
     orderBy: { createdAt: "desc" }
   })
 
-  if (links.length === 0) {
-    redirect("/")
+  if (!links.length) {
+    return (
+      <main className="min-h-screen bg-gray-950 p-8 text-white">
+        Nenhum link encontrado ainda.
+      </main>
+    )
   }
 
   return (
