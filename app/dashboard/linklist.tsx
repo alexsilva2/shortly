@@ -84,7 +84,7 @@ export default function LinkList({ links }: { links: Link[] }) {
   async function handleCopy() {
     const link = links.find(l => l.id === selected[0])
     if (link) {
-      await navigator.clipboard.writeText(`${window.location.origin}/${link.slug}`)
+      awaitnavigator.clipboard.writeText(`https://shortly-tau-taupe.vercel.app/${link.slug}`)
     }
   }
 
