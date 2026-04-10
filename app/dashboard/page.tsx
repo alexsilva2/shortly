@@ -3,6 +3,7 @@ export const dynamic = "force-dynamic";
 import { prisma } from "../lib/prisma"
 import LinkList from "./linklist"
 import Link from "next/link"
+import { redirect } from "next/navigation"
 
 export default async function Dashboard() {
   const links = await prisma.link.findMany({
@@ -10,11 +11,7 @@ export default async function Dashboard() {
   })
 
   if (!links.length) {
-    return (
-      <main className="min-h-screen bg-gray-950 p-8 text-white">
-        Nenhum link encontrado ainda.
-      </main>
-    )
+    redirect("/")
   }
 
   return (

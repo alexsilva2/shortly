@@ -66,14 +66,20 @@ export default function LinkList({ links }: { links: Link[] }) {
     window.location.reload()
   }
 
-  async function handleDelete() {
-    await fetch("/api/links", {
-      method: "DELETE",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ ids: selected }),
-    })
+ async function handleDelete() {
+  await fetch("/api/links", {
+    method: "DELETE",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ ids: selected }),
+  })
+
+  const remaining = links.filter(l => !selected.includes(l.id))
+  if (remaining.length === 0) {
+    window.location.href = "/"
+  } else {
     window.location.reload()
   }
+}
 
   async function handleCopy() {
     const link = links.find(l => l.id === selected[0])
